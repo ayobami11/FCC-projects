@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;1,400;1,600&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="./style.css" type="text/css">
+        <title>Survey Form</title>
+    </head>
+    <body>
+        <header>
+            <h1 id="title">Survey Form</h1>
+            <p id="description">This survey was created to help us understand the needs and better improve this platform.</p>
+        </header>
+        <main>
+            <form id="survey-form">
+                <!-- Name -->
+                <label id="name-label" for="name">Name: </label>
+                <input id="name" class="textfield" type="text" name="name" maxlength="30" placeholder="John Doe" required>
+                <!-- Email -->
+                <label id="email-label" for="email">Email: </label>
+                <input id="email" class="textfield" type="email" name="email" maxlength="30" placeholder="example@email.com" required>
+                <!-- Age -->
+                <label id="number-label" for="number">Age: </label>
+                <input id="number" class="textfield" type="number" name="age" min="12" max="120" placeholder="17">
+                <!-- Programming field -->
+                <label for="dropdown">What field of programming are you interested in?</label>
+                <br>
+                <select id="dropdown" name="field" required>
+                    <option value="web-development">Web Development</option>
+                    <option value="data-science">Data Science</option>
+                    <option value="mobile-development">Mobile Development</option>
+                    <option value="machine-learning">Machine Learning</option>
+                    <option value="artificial-intelligence">Artificial Intelligence</option>
+                </select>
+                <!-- Coding frequency -->
+                <p>How often do you code?</p>
+                <div class="flex-container border-btm">
+                    <div class="flex-item">
+                        <input id="rarely" type="radio" name="code" value="rarely">
+                        <label for="rarely">Rarely</label>
+                    </div>
+                    <div class="flex-item">
+                        <input id="occasionally" type="radio" name="code" value="occasionally">
+                        <label for="occasionally">Occasionally</label>
+                    </div>
+                    <div class="flex-item">
+                        <input id="frequently" type="radio" name="code" value="frequently">
+                        <label for="frequently">Frequently</label>
+                    </div>
+                    <div class="flex-item">
+                        <input id="everytime" type="radio" name="code" value="everytime" checked>
+                        <label for="everytime">Every chance I get!</label>
+                    </div>
+                </div>
+                <p>What learning styles do you use for coding?</p>
+                <div class="flex-container border-btm">
+                    <div class="flex-item">
+                        <input type="checkbox" id="video-courses" name="fcc" value="video-courses">
+                        <label for="video-courses">Video courses</label>
+                    </div>
+                    <div class="flex-item">
+                        <input type="checkbox" id="tutorials" name="fcc" value="tutorials">
+                        <label for="tutorials">Tutorials</label>
+                    </div>
+                    <div class="flex-item">
+                        <input type="checkbox" id="articles" name="fcc" value="articles">
+                        <label for="articles">Articles / blog posts</label>
+                    </div>
+                    <div class="flex-item">
+                        <input type="checkbox" id="books" name="fcc" value="books">
+                        <label for="books">Books</label>
+                    </div>
+                    <div class="flex-item">
+                        <input type="checkbox" id="docs" name="fcc" value="docs">
+                        <label for="docs">Docs</label>
+                    </div>
+                </div>
+                <!-- Suggestions and comments -->
+                <p>What would you like to see improved?</p>
+                <textarea rows="5" maxlength="250"></textarea>
+                <br>
+                <!-- Submit button -->
+                <button id="submit-btn" type="submit">Submit</button>
+            </form>
+        </main>
+    </body>
+</html>

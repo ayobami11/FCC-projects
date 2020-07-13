@@ -1,0 +1,114 @@
+/* General styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 16px;
+}
+  
+body {
+    background-image: url('https://storage.needpix.com/rsynced_images/background-2203989_1280.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.3rem;
+} 
+  
+header {
+    color: rgb(73, 2, 73);
+    margin: 0 auto;
+    text-align: center;
+    width: 90%;
+}
+  
+form {
+    background-color: rgb(60, 255, 0);
+    color: rgb(255, 69, 0);
+    border: 2px solid rgb(255, 69, 0);
+    line-height: 1.5;
+    margin: 0.5em auto 2em auto;
+    padding: 1em;
+    width: 70vw;
+}
+
+input {
+    font-size: 1rem;
+    outline: none;
+}
+
+select {
+    color: rgb(75, 75, 75);
+    font-size: 1.2rem;
+    padding: 0.3em;
+    width: 100%;
+}
+  
+textarea {
+    border: 1.5px solid #000000;
+    font-size: 1.2rem;
+    padding: 0.5em;
+    resize: none;
+    width: 100%;
+}
+
+button {
+    cursor: pointer;
+    outline: none;
+}
+
+/* Specific styles */
+#submit-btn {
+    background-color: rgb(99, 236, 202);
+    border: none;
+    color: rgb(255, 255, 255);
+    display: block;
+    font-weight: bold;
+    font-size: 1.2rem;
+    letter-spacing: 0.1em;
+    padding: 0.5em;
+    text-transform: uppercase;
+    width: 100%;
+}
+
+#submit-btn:active {
+    border: 1.5px solid rgb(53, 53, 53);
+}
+
+/* Classes */
+.flex-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.border-btm {
+    border-bottom: 1px solid rgb(2, 105, 97);
+    padding: 0.3em;
+}
+
+.textfield {
+    border: 1.5px solid rgb(238, 99, 0);
+    border-radius: 10px;
+    padding: 0.3em 0.5em;
+    width: 100%;
+}
+
+/* Media queries */
+@media (max-width: 700px) {
+    .flex-container {
+        flex-flow: column nowrap;
+    }
+}
+
+@media (max-width: 500px) {
+    html {
+        font-size: 12px;
+    }
+
+    form {
+        width: 90vw;
+    }
+}
