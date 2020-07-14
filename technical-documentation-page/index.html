@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Technical Documentation Page</title>
+        <link href="https://fonts.googleapis.com/css2?family=PT+Sans&display=swap" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="./style.css" type="text/css">
+    </head>
+    <body>
+        <header id="header">
+            <h1 id="title" class="center">Intermediate JavaScript</h1>
+            <nav id="navbar">
+                <header class="center">
+                    <h2>JavaScript Promises</h2>
+                </header>
+                <ul>
+                    <li><a class="nav-link" href="#intro_to_javascript">Intro to JavaScript</a></li>
+                    <li><a class="nav-link" href="#prerequisites">Prerequisites</a></li>
+                    <li>
+                        <a class="nav-link" href="#promises">Promises</a>
+                        <ul>
+                            <li><a class="nav-link" href="#constructing_a_promise_object">Constructing a promise object</a></li>
+                            <li><a class="nav-link" href="#consuming_promises">Consuming promises</a></li>
+                            <li><a class="nav-link" href="#separation_of_concerns">Separation of concerns</a></li>
+                            <li><a class="nav-link" href="#promise.all">Promise.all</a></li>
+                        </ul>
+                    </li>
+                    <li><a class="nav-link" href="#other_resources">Other resources</a></li>
+                </ul>
+            </nav>
+        </header>
+        <main id="main-doc">
+            <section id="intro_to_javascript" class="main-section">
+                <header>
+                    <h2>Intro to JavaScript<h2>
+                </header>
+                <p class="indent">JavaScript often abbreviated as JS, is a programming language that conforms to the ECMAScript specification. It was designed by Brendan Eich in 1995 who worked at Netscape Communications at that time. JavaScript is high-level, often just-in-time compiled, and multi-paradigm. It has curly-bracket syntax, dynamic typing, prototype-based object-orientation, and first-class functions.</p>
+                    <p class="indent">Alongside HTML and CSS, JavaScript is one of the core technologies of the World Wide Web. JavaScript enables interactive web pages and is an essential part of web applications. The vast majority of websites use it for client-side page behavior, and all major web browsers have a dedicated JavaScript engine to execute it.</p>
+            </section>
+            <section id="prerequisites" class="main-section">
+                <header>
+                    <h2>Prerequisites</h2>
+                </header>
+                <p>This guide assumes you have pre-existing knowledge of:</p>
+                <ul>
+                    <li><abbr title="Hyper Text Markup Language">HTML</abbr></li>
+                    <li><abbr title="Cascading Style Sheets">CSS</abbr></li>
+                    <li>Basic JavaScript</li>
+                    <li>JavaScript ES6</li>
+                </ul>
+            </section>
+
+            <article>
+                <section id="promises" class="main-section">                        
+                    <header>
+                        <h2>Promises</h2>
+                    </header>
+                    <p class="indent">In programming, an <a href="https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous" target="_blank">asynchronous operation</a> is one that allows the computer to "move on" to other tasks while waiting for the asynchronous operation to complete. Operations like making a network request or querying a database can be time-consuming but asynchronous JavaScript allows us to perform other tasks while awaiting their completion.</p>
+                    <p class="indent"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise" target="_blank">Promises</a> are objects that represent the eventual outcome (success or failure) of an asynchronous operation. A promise can be in one of three states: </p>
+                    <ul>
+                        <li>Pending: the initial state; this means the operation has not been completed yet.</li>
+                        <li>Fulfilled: the operation has completed successfully and the promise now has a resolved value.</li>
+                        <li>Rejected: the operation has failed and the promise has a reason for the failure. The reason is usually an error.</li>
+                    </ul>
+                    <p>We refer to as settled when it is no longer pending &horbar; it is either fulfilled or rejected.</p>
+                </section>
+
+                <section id="constructing_a_promise_object" class="main-section">
+                    <header>
+                        <h3>Constructing a Promise object</h3>
+                    </header>
+                    <p class="indent">To create a new Promise, we use the <code class="inline-code">new</code> keyword and the <code class="inline-code">Promise</code> constructor method. The <code class="inline-code">Promise</code> constructor method takes in a single function parameter known as the executor function &horbar; thus dictates how the promise should be settled.</p>
+                    <p>The executor function takes in two function parameters, <code class="inline-code">resolve()</code> and <code class="inline-code">reject()</code>. These two functions are built-in and not defined by the programmer.</p>
+                    <ul>
+                        <li>
+                            <p class="indent"><code class="inline-code">resolve()</code>: Takes one argument. When invoked, it changes the promise's status from pending to fulfilled, and the promise's resolved value is set to the argument passed in <code class="inline-code">resolve()</code>.</p>
+                        </li>
+                        <li>
+                            <p class="indent"><code class="inline-code">reject()</code>: Takes one argument &horbar; this is the reason for the failure of the promise. When invoked, it changes the value of the promise's status from pending to rejected.</p>
+                        </li>
+                    </ul>
+                    <p>For example:</p>
+                    <pre>
+                        <code>
+const executorFunction = (resolve, reject) => { 
+    if (condition) {
+        resolve('Resolved');
+    } else {
+        reject('Rejected');
+    }
+};
+const myPromise = new Promise(executorFunction);
+                        </code>
+                    </pre>
+                    <p>Or simply:</p>
+                    <pre>
+                        <code>
+const myPromise = () => {
+    return new Promise((resolve, reject) => {
+        if (condition) {
+            resolve('Resolved');
+        } else {
+            reject('Rejected');
+        }
+    })
+};
+myPromise();
+                        </code>
+                    </pre>
+                </section>
+
+                <section id="consuming_promises" class="main-section">
+                    <header>
+                        <h3>Consuming Promises</h3>
+                    </header>
+                    <p class="indent">The initial state of a promise is pending but it will eventually settle. Promise come with a <code class="inline-code">then()</code> method. This is used to determine what happens when the promise settles.</p>
+                    <p class="indent"><code class="inline-code">then()</code> is a higher-order function which can take two callback functions as arguments &horbar; also called handlers.</p>
+                    <ul>
+                        <li>
+                            <p>The first handler, also called <code class="inline-code">onFulfilled</code>, is a success handler, and it should contain logic for the promise resolving.</p>
+                        </li>
+                        <li>
+                            <p>The second handler, also called <code class="inline-code">onRejected</code>, is a failure handler, and it should contain logic for the promise rejecting.</p>
+                        </li>
+                    </ul>
+                    <p class="indent"><code class="inline-code">then()</code> can be invoked with one, both or neither handlers. However, if the appropriate handler is not given, instead of throwing an error, <code class="inline-code">then()</code> will just return a promise with the same settled value as the promise it was called on.</p>
+                    <p><strong>Note:</strong> <code class="inline-code">then()</code> always returns a promise.</p>
+                    <p>To handle a settled promise, we invoke <code class="inline-code">then()</code> on the promise passing in success and failure handler functions. Like so:</p>
+                    <pre>
+                        <code>
+let myPromise = () => {
+    return new Promise((resolve, reject) => {
+        let randomNumber = Math.random();
+        if (randomNumber < 0.5) {
+            resolve('Yes');
+        } else {
+            reject('No');
+        }
+    })
+};
+const successHandler = resolvedValue => {
+    console.log(resolvedValue);
+}
+const failureHandler = rejectedValue => {
+    console.log(rejectedValue);
+}
+myPromise.then(successHandler, failureHandler);
+                        </code>
+                    </pre>
+                </section>
+
+                <section id="separation_of_concerns" class="main-section">
+                    <header>
+                        <h3>Separation of Concerns</h3>
+                    </header>
+                    <p class="indent">One way to write cleaner code is to follow a principle called <a href="https://en.wikipedia.org/wiki/Separation_of_concerns" target="_blank">separation of concerns</a>. Separation of concerns means organizing your code into distinct sections to handle a specific task. Since JavaScript doesn't care about whitespace, it's common convention to put each part of a promise chain on a new line to improve readability.</p>
+                    <p class="indent">Instead of passing both handlers into one <code class="inline-code">then()</code> function, we can chain a second one to the first. The first <code class="inline-code">then()</code> with a success handler and the second <code class="inline-code">then()</code> with a failure handler.</p>
+                    <p>Example:</p>
+                    <pre>
+                        <code>
+myPromise
+.then(resolvedValue => {
+    console.log(resolvedValue);
+})
+.then((null, rejectedValue) => {
+    console.log(rejectedValue);
+})
+                        </code>
+                    </pre>
+                    <p class="indent">Instead of chaining a second <code class="inline-code">then()</code> with a failure handler, it is better practice to use a <code class="inline-code">catch()</code> function. <code class="inline-code">catch()</code> takes one argument callback function, <code class="inline-code">onRejected</code>. When a promise is rejected, <code class="inline-code">catch()</code> is invoked with the reason for the rejection. Using <code class="inline-code">catch()</code> accomplishes the same thing as a second <code class="inline-code">then()</code> with only a failure handler i.e then(null, onRejected).</p>
+                    <p>Example:</p>
+                    <pre>
+                        <code>
+myPromise
+.then(resolvedValue => {console.log(resolvedValue);})
+.catch(rejectedValue => {console.log(rejectedValue);})
+                        </code>
+                    </pre>
+                </section>
+
+                <section id="promise.all" class="main-section">
+                    <header>
+                        <h3><code>Promise.all</code></h3>
+                    </header>
+                    <p class="indent">If we are dealing with multiple promises but we don't care about the order, we use <code class="inline-code">Promise.all()</code>. To maximize efficiency, we use concurrency i.e multiple asynchronous operations happening simultaneously.</p>
+                    <p><code class="inline-code">Promise.all()</code> accepts an array of promises as its argument and returns a single promise which will settle in one of two ways:</p>
+                    <ul>
+                        <li>
+                            <p class="indent">If every promise in the argument array resolves, the single promise returned from <code class="inline-code">Promise.all()</code> will resolve with an array containing the resolved value from each promise in the argument array.</p>
+                        </li>
+                        <li>
+                            <p class="indent">If any promise from the argument array rejects, the single promise returned from <code class="inline-code">Promise.all()</code> will immediately reject with the reason for the rejection. This behavior is sometimes referred to as <span class="italic"><a href="https://en.wikipedia.org/wiki/Fail-fast" target="_blank">failing fast</a></span>. It then prints the rejection message, if any.</p>
+                            <p class="indent">Assuming <code class="inline-code">promOne()</code>, <code class="inline-code">promTwo()</code> and <code class="inline-code">promThree()</code> all return promises:</p>
+                            <pre>
+                                <code>
+let myPromises = Promise.all([promOne(), promTwo(), promThree()]);
+myPromises
+.then(promiseArray => {
+    console.log(promiseArray);
+})
+.catch(rejectionReason => {
+    console.log(rejectionReason);
+})
+                                </code>
+                            </pre>
+                        </li>
+                    </ul>
+                </section>
+            </article>
+
+            <section id="other_resources" class="main-section">
+                <header>
+                    <h2>Other resources</h3>
+                </header>
+                <ul>
+                    <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise" target="_blank">Wikipedia: Promises</a></li>
+                    <li><a href="https://www.codecademy.com/learn/asynchronous-javascript/modules/javascript-promises" target="_blank">Codecademy: Promises</a></li>
+                    <li><a href="https://javascript.info/promise-basics" target="_blank">Javascript.info: Promises</a></li>
+                </ul>
+            </section>
+            <p>Check out my <a href="https://github.com/ayobami11/" target="_blank">GitHub</a> projects.</p>
+        </main>
+    </body>
+</html>
